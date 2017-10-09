@@ -2,4 +2,4 @@
 
 - Clock implemented with vanilla JS and CSS
 
-### To view, simply clone the repo and open index.html in browser
+- To view, simply clone the repo and open index.html in browser
