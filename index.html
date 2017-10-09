@@ -5,8 +5,6 @@
   <title>JS + CSS Clock</title>
 </head>
 <body>
-
-
     <div class="clock">
       <div class="clock-face">
         <div class="hand hour-hand"></div>
@@ -14,7 +12,6 @@
         <div class="hand second-hand"></div>
       </div>
     </div>
-
 
   <style>
     html {
@@ -62,9 +59,12 @@
       background:black;
       position: absolute;
       top:50%;
+      /* allow clock hands to transition from the far right side */
       transform-origin: 100%;
+      /* rotate div 90 degrees so that the clock starts at 12:00 */
       transform: rotate(90deg);
       transition: all 0.05s;
+      /*  makes the hands appear to bounce back a bit on each tick */
       transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
     }
 </style>
@@ -78,18 +78,22 @@
     const now = new Date();
 
     const seconds = now.getSeconds();
+    // convert n/60 seconds to n/360 degrees
     const secondsDegrees = ((seconds / 60) * 360) + 90;
     secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
 
     const mins = now.getMinutes();
+    // convert n/60 minutes to n/360 degrees with seconds accounted for
     const minsDegrees = ((mins / 60) * 360) + ((seconds/60)*6) + 90;
     minsHand.style.transform = `rotate(${minsDegrees}deg)`;
 
     const hour = now.getHours();
+    // convert n/12 hours to n/360 degrees with minutes accounted for
     const hourDegrees = ((hour / 12) * 360) + ((mins/60)*30) + 90;
     hourHand.style.transform = `rotate(${hourDegrees}deg)`;
   }
 
+  // calls setDate() every second
   setInterval(setDate, 1000);
 
   setDate();
